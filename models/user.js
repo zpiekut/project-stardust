@@ -7,11 +7,9 @@ module.exports = function(sequelize, DataTypes) {
     lastname: DataTypes.STRING,
     neighborhood: DataTypes.STRING
   }, {
-    timestamps: false
-  }, {
     classMethods: {
       associate: function(models) {
-        // create one to many relationship
+        User.belongsToMany(models.Project, {through: 'UserProject'});
       }
     }
   });

@@ -8,7 +8,8 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
-        Project.belongsTo(models.User);
+        Project.belongsTo(models.User, {as: 'Owner'});
+        Project.belongsToMany(models.User, {through: 'UserProject'});
       }
     }
   });
