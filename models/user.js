@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
     classMethods: {
       associate: function(models) {
         User.belongsToMany(models.Project, {through: 'UserProject'});
+        User.hasMany(models.WorkSession, {as: 'WorkSessions'});
       }
     }
   });
