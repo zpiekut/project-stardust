@@ -10,6 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         Project.belongsTo(models.User, {as: 'Owner'});
         Project.belongsToMany(models.User, {through: 'UserProject'});
+        Project.hasMany(models.WorkSession, {as: 'WorkSessions'});
       }
     }
   });
