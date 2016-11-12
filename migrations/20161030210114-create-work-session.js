@@ -18,6 +18,11 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      approved: {
+        allowedNull: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false
       }
     });
   },
