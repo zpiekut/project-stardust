@@ -7,7 +7,11 @@ const models    = require('./models');
 const server = new Hapi.Server();
 
 server.connection({ port: 3000 });
-server.route(require('./lib/routes'));
+server.route(require('./lib/routes/user'));
+server.route(require('./lib/routes/project'));
+server.route(require('./lib/routes/credit'));
+server.route(require('./lib/routes/redemption'));
+server.route(require('./lib/routes/work-session'));
 
 models.sequelize.sync().then(function() {
   server.start(function() {
