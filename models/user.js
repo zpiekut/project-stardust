@@ -11,6 +11,7 @@ module.exports = function(sequelize, DataTypes) {
       associate: function(models) {
         User.belongsToMany(models.Project, {through: 'UserProject'});
         User.hasMany(models.WorkSession, {as: 'WorkSessions'});
+        User.hasMany(models.Credits, {as: 'Credits'});
       }
     }
   });
