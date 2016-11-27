@@ -12,6 +12,7 @@ server.route(require('./lib/routes/project'));
 server.route(require('./lib/routes/credit'));
 server.route(require('./lib/routes/redemption'));
 server.route(require('./lib/routes/work-session'));
+server.route(require('./lib/routes/credit-transaction'));
 
 models.sequelize.sync().then(function() {
   server.start(function() {
