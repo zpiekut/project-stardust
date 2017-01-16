@@ -17,7 +17,7 @@ const options = {
   }
 };
 
-server.connection({ port: 3000 });
+server.connection({ port: 8081 });
 server.route(require('./lib/routes/user'));
 server.route(require('./lib/routes/project'));
 server.route(require('./lib/routes/credit'));
@@ -32,6 +32,6 @@ server.register([ Inert, Vision, {
 
 models.sequelize.sync().then(function() {
   server.start(function() {
-    console.log('Running on 3000');
+    console.log('Running on 8081');
   });
 });

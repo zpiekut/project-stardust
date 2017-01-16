@@ -8,6 +8,12 @@ var env       = process.env.NODE_ENV || 'development';
 var config    = require(__dirname + '/../config/config.json')[env];
 var db        = {};
 
+if(env === 'test' || env === 'production') {
+  config.username = process.env.RDS_USERNAME;
+  config.password = process.env.RDS_PASSWORD;
+  config.host = process.env.RDS_HOSTNAME;
+}
+
 if (config.use_env_variable) {
   var sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
