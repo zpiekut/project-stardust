@@ -1,12 +1,18 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Redemption = sequelize.define('Redemption', {
+    orgName: DataTypes.STRING,
     title: DataTypes.STRING,
-    description: DataTypes.STRING,
     cost: DataTypes.INTEGER,
+    numSlots: DataTypes.INTEGER,
+    time: DataTypes.STRING,
     location: DataTypes.STRING,
+    instructions: DataTypes.STRING,
+    description: DataTypes.STRING,
+    about: DataTypes.STRING,
+    website: DataTypes.STRING,
     total: DataTypes.INTEGER,
-    date: DataTypes.DATE
+    image: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

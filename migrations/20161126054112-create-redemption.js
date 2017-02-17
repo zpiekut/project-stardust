@@ -8,23 +8,41 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
+      orgName: {
+        type: Sequelize.STRING
+      },
       title: {
+        type: Sequelize.STRING
+      },
+      hours: {
+        type: Sequelize.INTEGER
+      },
+      numSlots: {
+        type: Sequelize.INTEGER
+      },
+      time: {
+        type: Sequelize.STRING
+      },
+      location: {
+        type: Sequelize.STRING
+      },
+      instructions: {
         type: Sequelize.STRING
       },
       description: {
         type: Sequelize.STRING
       },
-      cost: {
-        type: Sequelize.INTEGER
-      },
-      location: {
+      about: {
         type: Sequelize.STRING
       },
-      total: {
-        type: Sequelize.INTEGER
+      about: {
+        type: Sequelize.STRING
       },
-      date: {
-        type: Sequelize.DATE
+      website: {
+        type: Sequelize.STRING
+      },
+      image: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
