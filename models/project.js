@@ -1,11 +1,17 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Project = sequelize.define('Project', {
+    orgName: DataTypes.STRING,
     title: DataTypes.STRING,
-    description: DataTypes.STRING,
     hours: DataTypes.INTEGER,
+    numSlots: DataTypes.INTEGER,
+    time: DataTypes.STRING,
     location: DataTypes.STRING,
-    date: DataTypes.DATE
+    instructions: DataTypes.STRING,
+    description: DataTypes.STRING,
+    about: DataTypes.STRING,
+    website: DataTypes.STRING,
+    image: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {
