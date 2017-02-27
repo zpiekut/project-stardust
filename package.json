@@ -9,9 +9,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^1.0.2",
     "boom": "^4.2.0",
     "gulp-nodemon": "^2.2.1",
     "hapi": "^15.2.0",
+    "hapi-auth-basic": "^4.2.0",
     "hapi-swagger": "^7.5.0",
     "inert": "^4.0.4",
     "joi": "^9.2.0",
