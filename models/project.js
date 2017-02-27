@@ -8,8 +8,8 @@ module.exports = function(sequelize, DataTypes) {
     time: DataTypes.STRING,
     location: DataTypes.STRING,
     instructions: DataTypes.STRING,
-    description: DataTypes.STRING,
-    about: DataTypes.STRING,
+    description: DataTypes.TEXT,
+    about: DataTypes.TEXT,
     website: DataTypes.STRING,
     image: DataTypes.STRING
   }, {
