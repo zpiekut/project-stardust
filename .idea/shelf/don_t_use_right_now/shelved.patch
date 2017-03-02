@@ -1,0 +1,135 @@
+Index: server.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server.js	(date 1487716276000)
++++ server.js	(revision )
+@@ -35,3 +35,27 @@
+     console.log('Running on 8081');
+   });
+ });
++
++apiRoutes.post('/authenticate', function(req, res) {
++  User.findOne({
++    name: req.body.name
++  }, function(err, user) {
++    if (err) throw err;
++
++    if (!user) {
++      res.send({success: false, msg: 'Authentication failed. User not found.'});
++    } else {
++      // check if password matches
++      user.comparePassword(req.body.password, function (err, isMatch) {
++        if (isMatch && !err) {
++          // if user is found and password is right create a token
++          var token = jwt.encode(user, config.secret);
++          // return the information including token as JSON
++          res.json({success: true, token: 'JWT ' + token});
++        } else {
++          res.send({success: false, msg: 'Authentication failed. Wrong password.'});
++        }
++      });
++    }
++  });
++});
+\ No newline at end of file
+Index: lib/emails.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/emails.js	(date 1487716276000)
++++ lib/emails.js	(revision )
+@@ -57,5 +57,4 @@
+       };
+     });
+   }
+-}
++}
+\ No newline at end of file
+-
+\ No newline at end of file
+Index: lib/routes/login.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/routes/login.js	(revision )
++++ lib/routes/login.js	(revision )
+@@ -0,0 +1,40 @@
++/**
++ * Created by neelkrishna on 2/22/17.
++ */
++var Joi = require('joi');
++
++module.exports = [
++    {
++        method: 'GET',
++        path: '/api/users/{userId}',
++        handler: api.users.one,
++        config: {
++            tags: ['api']
++        }
++    },
++    {
++        method: 'GET',
++        path: '/api/users',
++        handler: api.users.all,
++        config: {
++            tags: ['api']
++        }
++    },
++    {
++        method: 'POST',
++        path: '/api/users',
++        handler: api.users.create,
++        config: {
++            tags: ['api'],
++            validate: {
++                payload: {
++                    email: Joi.string().email().required(),
++                    password: Joi.string().min(6).required(),
++                    firstname: Joi.string().min(2).required(),
++                    lastname: Joi.string().min(2).required(),
++                    neighborhood: Joi.string().min(3).required()
++                }
++            }
++        }
++    }
++];
+Index: config/passport.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- config/passport.js	(revision )
++++ config/passport.js	(revision )
+@@ -0,0 +1,26 @@
++/**
++ * Created by neelkrishna on 2/22/17.
++ */
++
++var JwtStrategy = require('passport-jwt').Strategy;
++
++// load up the user model
++var User = require('../app/models/user');
++var config = require('../config/database'); // get db config file
++
++module.exports = function(passport) {
++    var opts = {};
++    opts.secretOrKey = config.secret;
++    passport.use(new JwtStrategy(opts, function(jwt_payload, done) {
++        User.findOne({id: jwt_payload.id}, function(err, user) {
++            if (err) {
++                return done(err, false);
++            }
++            if (user) {
++                done(null, user);
++            } else {
++                done(null, false);
++            }
++        });
++    }));
++};
+\ No newline at end of file

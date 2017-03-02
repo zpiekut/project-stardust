@@ -1,0 +1,90 @@
+Index: server.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- server.js	(date 1487716276000)
++++ server.js	(revision )
+@@ -8,8 +8,13 @@
+ const config      = require(__dirname + '/config/config')[env];
+ const models      = require('./models');
+ const Pack        = require('./package');
++const bodyParser  = require('body-parser');
++const jwt         = require('jsonwebtoken');
++const morgan      = require('morgan');
+ const server      = new Hapi.Server();
+ 
++var User   = require('./models/user');
++
+ const options = {
+   info: {
+     'title': 'Test API Documentation',
+@@ -17,6 +22,13 @@
+   }
+ };
+ 
++//to get info from POST and URL params
++Hapi.use(bodyParser.urlencoded({ extended: false }));
++Hapi.use(bodyParser.json());
++
++//to log to console
++Hapi.use(morgan('dev'));
++
+ server.connection({ port: 8081 });
+ server.route(require('./lib/routes/user'));
+ server.route(require('./lib/routes/project'));
+@@ -29,9 +41,29 @@
+   'register': HapiSwagger,
+   'options': options
+ }]);
++
++Hapi.get('/setup', function(req, res) {
++
++  // create a sample user
++  var neel1 = new User({
++    email: 'Neel1@neel.com',
++    password: 'password',
++    firstname: 'neel',
++    lastname: '1',
++    neighborhood: 'westside'
++  });
++
++  // save the sample user.  Shouldn't have to use save with get
++  neel1.save(function(err) {
++    if (err) throw err;
++
++    console.log('User saved successfully');
++    res.json({ success: true });
++  });
++});
+ 
+ models.sequelize.sync().then(function() {
+   server.start(function() {
+     console.log('Running on 8081');
+   });
+-});
++});
+\ No newline at end of file
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package.json	(date 1487716276000)
++++ package.json	(revision )
+@@ -9,12 +9,15 @@
+   "author": "",
+   "license": "ISC",
+   "dependencies": {
++    "body-parser": "^1.16.1",
+     "boom": "^4.2.0",
+     "gulp-nodemon": "^2.2.1",
+     "hapi": "^15.2.0",
+     "hapi-swagger": "^7.5.0",
+     "inert": "^4.0.4",
+     "joi": "^9.2.0",
++    "jsonwebtoken": "^7.3.0",
++    "morgan": "^1.8.1",
+     "mysql": "^2.11.1",
+     "node-uuid": "^1.4.7",
+     "nodemailer": "^3.0.2",
