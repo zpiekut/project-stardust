@@ -4,6 +4,7 @@ const Hapi      = require('hapi');
 const env       = process.env.NODE_ENV || 'development';
 const config    = require(__dirname + '/config/config')[env];
 const models    = require('./models');
+var passport	= require('passport');
 const server = new Hapi.Server();
 
 server.connection({ port: 3000 });
@@ -13,6 +14,8 @@ server.route(require('./lib/routes/credit'));
 server.route(require('./lib/routes/redemption'));
 server.route(require('./lib/routes/work-session'));
 server.route(require('./lib/routes/credit-transaction'));
+
+app.use(passport.initialize());
 
 var users = { // collect users from db
   1: {
