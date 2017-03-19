@@ -1,7 +1,11 @@
-1) Clean up lib/api/auth
-
-2) lib/api/user.js: 25 ORM is creating null users. Solution: fix order of signup.html and see if it helps
-
-3) Clean up lib/routes/auth.js
-
 4) server.js: fix validate
+
+
+
+
+
+ON HOLD  -- 1) Clean up lib/api/auth
+
+COMPLETE -- 2) lib/api/user.js: 25 ORM is creating null users. Solution: fix order of signup.html and see if it helps
+
+COMPLETE -- 3) Clean up lib/routes/auth.js
