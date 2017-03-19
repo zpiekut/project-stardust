@@ -1,5 +1,7 @@
 4) server.js: fix validate
 
+5) find discrepancies with master/develop
+
 
 
 
