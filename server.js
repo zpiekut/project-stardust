@@ -9,13 +9,13 @@ const HapiSwagger = require('hapi-swagger');
 const models    = require('./models');
 const uuid      = require('uuid');
 const nJwt      = require('njwt');
-const Pack        = require('./package');
+//const Pack      = require('./package');
 const server = new Hapi.Server();
 
 const options = {
   info: {
-    'title': 'Test API Documentation',
-    'version': Pack.version,
+    'title': 'Test API Documentation'
+    //,'version': Pack.version,
   }
 };
 
