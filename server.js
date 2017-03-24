@@ -19,28 +19,22 @@ const options = {
   }
 };
 
-server.connection({ port: 8081 });
-server.route(require('./lib/routes/user'));
-server.route(require('./lib/routes/project'));
-server.route(require('./lib/routes/credit'));
-server.route(require('./lib/routes/redemption'));
-server.route(require('./lib/routes/work-session'));
-server.route(require('./lib/routes/credit-transaction'));
-server.route(require('./lib/routes/auth'));
-
-
 //fill this out
 var validate = function (decoded, request, callback) {
-  var secretKey = uuid.v4();
-  var token = request.headers.tokenPassed;
-  var verifiedJwt = nJwt.verify(token,secretKey);
-  if (!verifiedJwt) {
-    return callback(null, false);
-  }
-  else {
-    return callback(null, true);
-  }
+  console.log("Inside validate function");
+  // var secretKey = uuid.v4();
+  // var token = request.headers.tokenPassed;
+  // var verifiedJwt = nJwt.verify(token,secretKey);
+  // if (!verifiedJwt) {
+  //   return callback(null, false);
+  // }
+  // else {
+  //   return callback(null, true);
+  // }
+  return callback(null, true);
 };
+
+server.connection({ port: 8081 });
 
 server.register(require('hapi-auth-jwt2'), function (err) {
 
@@ -55,6 +49,24 @@ server.register(require('hapi-auth-jwt2'), function (err) {
       });
 
   server.auth.default('jwt');
+
+  server.route(require('./lib/routes/user'));
+  server.route(require('./lib/routes/project'));
+  server.route(require('./lib/routes/credit'));
+  server.route(require('./lib/routes/redemption'));
+  server.route(require('./lib/routes/work-session'));
+  server.route(require('./lib/routes/credit-transaction'));
+  server.route(require('./lib/routes/auth'));
+
+  server.route([
+    {
+      method: ['GET'], path: '/restricted', config: { auth: 'jwt' },
+      handler: function(request, reply) {
+        reply({text: 'You used a Token!'})
+            .header("Authorization", request.headers.authorization);
+      }
+    }
+  ]);
 });
 
 server.register([ Inert, Vision, {
