@@ -1,7 +1,5 @@
-1) Clean up lib/api/auth
+1) Fix ./package implementation in server.js
 
-2) lib/api/user.js: 25 ORM is creating null users. Solution: fix order of signup.html and see if it helps
+2) Make model attributes match db tables
 
-3) Clean up lib/routes/auth.js
-
-4) server.js: fix validate
+3) When you sign up it directs you to profile, but it should log you in first

@@ -9,7 +9,7 @@ const HapiSwagger = require('hapi-swagger');
 const models    = require('./models');
 const uuid      = require('uuid');
 const nJwt      = require('njwt');
-//const corsHeaders = require('hapi-cors-headers');
+const SECRET_KEY = 'InvolveMINTsSecret';
 //const Pack      = require('./package');
 const server = new Hapi.Server();
 
@@ -20,12 +20,10 @@ const options = {
   }
 };
 
-//fill this out
 var validate = function (decoded, request, callback) {
   console.log("Inside validate function");
-  var secretKey = 'NeverShareYourSecret';
   var token = request.headers.authorization;
-  var verifiedJwt = nJwt.verify(token,secretKey);
+  var verifiedJwt = nJwt.verify(token, SECRET_KEY);
   if (!verifiedJwt) {
     return callback(null, false);
   }
@@ -38,14 +36,6 @@ server.connection({ port: 8081});
 
 server.register({
   register: require('hapi-cors')
-//   ,options: {
-//     origins: ['http://localhost:8081']
-//   }
-// }, function(err){
-//   server.start(function(){
-//     console.log("error");
-//     console.log(server.info.uri);
-//   });
 });
 
 server.register(require('hapi-auth-jwt2'), function (err) {
@@ -55,12 +45,10 @@ server.register(require('hapi-auth-jwt2'), function (err) {
   }
 
   server.auth.strategy('jwt', 'jwt', true,
-      { key: 'NeverShareYourSecret',          // Never Share your secret key
-        validateFunc: validate,            // validate function defined above
+      { key: SECRET_KEY,
+        validateFunc: validate,
         verifyOptions: { ignoreExpiration: true }
       });
-
-  //server.auth.default('jwt');
 
   server.route(require('./lib/routes/user'));
   server.route(require('./lib/routes/project'));
@@ -69,16 +57,6 @@ server.register(require('hapi-auth-jwt2'), function (err) {
   server.route(require('./lib/routes/work-session'));
   server.route(require('./lib/routes/credit-transaction'));
   server.route(require('./lib/routes/auth'));
-
-  server.route([
-    {
-      method: ['GET'], path: '/restricted', config: { auth: 'jwt' },
-      handler: function(request, reply) {
-        reply({text: 'You used a Token!'})
-            .header("Authorization", request.headers.authorization);
-      }
-    }
-  ]);
 });
 
 server.register([ Inert, Vision, {
