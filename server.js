@@ -23,16 +23,15 @@ const options = {
 //fill this out
 var validate = function (decoded, request, callback) {
   console.log("Inside validate function");
-  // var secretKey = uuid.v4();
-  // var token = request.headers.tokenPassed;
-  // var verifiedJwt = nJwt.verify(token,secretKey);
-  // if (!verifiedJwt) {
-  //   return callback(null, false);
-  // }
-  // else {
-  //   return callback(null, true);
-  // }
-  return callback(null, true);
+  var secretKey = 'NeverShareYourSecret';
+  var token = request.headers.authorization;
+  var verifiedJwt = nJwt.verify(token,secretKey);
+  if (!verifiedJwt) {
+    return callback(null, false);
+  }
+  else {
+    return callback(null, true);
+  }
 };
 
 server.connection({ port: 8081});
