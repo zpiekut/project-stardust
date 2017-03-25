@@ -9,6 +9,7 @@ const HapiSwagger = require('hapi-swagger');
 const models    = require('./models');
 const uuid      = require('uuid');
 const nJwt      = require('njwt');
+//const corsHeaders = require('hapi-cors-headers');
 //const Pack      = require('./package');
 const server = new Hapi.Server();
 
@@ -34,7 +35,19 @@ var validate = function (decoded, request, callback) {
   return callback(null, true);
 };
 
-server.connection({ port: 8081 });
+server.connection({ port: 8081});
+
+server.register({
+  register: require('hapi-cors')
+//   ,options: {
+//     origins: ['http://localhost:8081']
+//   }
+// }, function(err){
+//   server.start(function(){
+//     console.log("error");
+//     console.log(server.info.uri);
+//   });
+});
 
 server.register(require('hapi-auth-jwt2'), function (err) {
 
@@ -42,13 +55,13 @@ server.register(require('hapi-auth-jwt2'), function (err) {
     console.log(err);
   }
 
-  server.auth.strategy('jwt', 'jwt',
+  server.auth.strategy('jwt', 'jwt', true,
       { key: 'NeverShareYourSecret',          // Never Share your secret key
         validateFunc: validate,            // validate function defined above
-        verifyOptions: { algorithms: [ 'HS256' ] } // pick a strong algorithm
+        verifyOptions: { ignoreExpiration: true }
       });
 
-  server.auth.default('jwt');
+  //server.auth.default('jwt');
 
   server.route(require('./lib/routes/user'));
   server.route(require('./lib/routes/project'));
