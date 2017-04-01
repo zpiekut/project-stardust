@@ -14,6 +14,9 @@ module.exports = {
       title: {
         type: Sequelize.STRING
       },
+      offer: {
+        type: Sequelize.TEXT
+      },
       hours: {
         type: Sequelize.INTEGER
       },
