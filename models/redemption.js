@@ -17,6 +17,7 @@ module.exports = function(sequelize, DataTypes) {
   }, {
     classMethods: {
       associate: function(models) {
+        Redemption.belongsTo(models.User, {as: 'Owner'});
         Redemption.belongsToMany(models.User, {through: 'UserRedemption'});
       }
     }
