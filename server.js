@@ -57,6 +57,7 @@ server.register(require('hapi-auth-jwt2'), function (err) {
   server.route(require('./lib/routes/work-session'));
   server.route(require('./lib/routes/credit-transaction'));
   server.route(require('./lib/routes/auth'));
+  server.route(require('./lib/routes/voucher-code'));
 });
 
 server.register([ Inert, Vision, {
