@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     about: DataTypes.TEXT,
     website: DataTypes.STRING,
     total: DataTypes.INTEGER,
-    image: DataTypes.STRING
+    image: DataTypes.STRING,
+    expireDate: DataTypes.DATE
   }, {
     classMethods: {
       associate: function(models) {
