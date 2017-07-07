@@ -9,9 +9,9 @@
   },
   "test": {
     "username": "root",
-    "password": "password",
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "password": "rd#D13wajfS6",
+    "database": "involvemint_dev",
+    "host": "involvemint-dev.c2nzwjrt4j35.us-east-1.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "production": {
