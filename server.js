@@ -32,10 +32,11 @@ var validate = function (decoded, request, callback) {
   }
 };
 
-server.connection({ port: 8081});
-
-server.register({
-  register: require('hapi-cors')
+server.connection({ 
+  port: 8081,
+  routes: {cors: {
+    additionalHeaders: ['access-control-allow-origin']
+  }}
 });
 
 server.register(require('hapi-auth-jwt2'), function (err) {
