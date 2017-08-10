@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "aguid": "^2.0.0",
+    "aws-sdk": "^2.81.0",
     "boom": "^4.2.0",
     "cookies": "^0.7.0",
     "gulp-nodemon": "^2.2.1",
@@ -21,6 +22,7 @@
     "inert": "^4.0.4",
     "joi": "^9.2.0",
     "jsonwebtoken": "^7.3.0",
+    "moment": "^2.18.1",
     "mysql": "^2.11.1",
     "njwt": "^0.4.0",
     "node-uuid": "^1.4.7",
