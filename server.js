@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config()
+
 const Hapi      = require('hapi');
 const env       = process.env.NODE_ENV || 'development';
 const config    = require(__dirname + '/config/config')[env];
@@ -12,6 +14,7 @@ const nJwt      = require('njwt');
 const SECRET_KEY = 'InvolveMINTsSecret';
 //const Pack      = require('./package');
 const server = new Hapi.Server();
+
 
 const options = {
   info: {
