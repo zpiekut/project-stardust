@@ -1,6 +1,5 @@
 'use strict';
 
-require('dotenv').config()
 
 const Hapi      = require('hapi');
 const env       = process.env.NODE_ENV || 'development';
