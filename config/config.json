@@ -20,5 +20,10 @@
     "database": "database_production",
     "host": "127.0.0.1",
     "dialect": "mysql"
-  }
+  },
+  "aws":{
+     "accessKeyId": "AKIAIKNFZKIOQQ2BS3AQ", 
+     "secretAccessKey": "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", 
+     "region": "us-east-1"
+    }
 }
