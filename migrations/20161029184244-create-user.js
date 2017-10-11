@@ -2,11 +2,16 @@
 module.exports = {
   up: function(migration, DataTypes, done) {
     migration.createTable("Users", {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER
+      // id: {
+      //   allowNull: false,
+      //   autoIncrement: true,
+      //   primaryKey: true,
+      //   type: Sequelize.INTEGER
+      // },
+       uuid: {
+        type: Sequelize.UUID,
+        defaultValue: Sequelize.UUIDV1,
+        primaryKey: true
       },
       email: {
         allowNull: false,

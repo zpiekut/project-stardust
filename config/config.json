@@ -11,7 +11,7 @@
     "username": "root",
     "password": "rd#D13wajfS6",
     "database": "involvemint_dev",
-    "host": "involvemint-dev.c2nzwjrt4j35.us-east-1.rds.amazonaws.com",
+    "host": "http://involvemint-v2-dev-env.wm32c6xmqt.us-east-1.elasticbeanstalk.com",
     "dialect": "mysql"
   },
   "production": {

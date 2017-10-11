@@ -1,6 +1,11 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var Redemption = sequelize.define('Redemption', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
+      primaryKey: true
+    },
     orgName: DataTypes.STRING,
     title: DataTypes.STRING,
     offer: DataTypes.TEXT,

@@ -1,6 +1,11 @@
 'use strict';
 module.exports = function(sequelize, DataTypes) {
   var VoucherCode = sequelize.define('VoucherCode', {
+    id: {
+      type: DataTypes.UUID,
+      defaultValue: DataTypes.UUIDV1,
+      primaryKey: true
+    },
     code: DataTypes.INTEGER,
     used: DataTypes.BOOLEAN
   }, {
